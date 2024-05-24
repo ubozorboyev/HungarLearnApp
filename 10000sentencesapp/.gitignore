@@ -1,1 +1,2 @@
 /build
+#./gradlew compileDebugAndroidTestKotlin -Dorg.gradle.java.home=/Users/ulugbekbozorboev/Library/Android/sdk

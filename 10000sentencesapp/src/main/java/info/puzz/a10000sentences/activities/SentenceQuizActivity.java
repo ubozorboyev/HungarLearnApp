@@ -3,12 +3,12 @@ package info.puzz.a10000sentences.activities;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.databinding.DataBindingUtil;
+import androidx.databinding.DataBindingUtil;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
+import androidx.core.content.ContextCompat;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -114,11 +114,11 @@ public class SentenceQuizActivity extends BaseActivity {
         sentenceId = getIntent().getStringExtra(ARG_SENTENCE_ID);
 
         Sentence sentence = dao.getSentenceBySentenceId(sentenceId);
-        if (sentence == null) {
-            Toast.makeText(this, R.string.unexpected_error, Toast.LENGTH_SHORT).show();
-            CollectionsActivity.start(this);
-            return;
-        }
+//        if (sentence == null) {
+//            Toast.makeText(this, R.string.unexpected_error, Toast.LENGTH_SHORT).show();
+//            CollectionsActivity.start(this);
+//            return;
+//        }
 
         SentenceCollection collection = dao.getCollection(sentence.collectionId);
         List<Sentence> randomSentences = dao.getRandomSentences(collection);

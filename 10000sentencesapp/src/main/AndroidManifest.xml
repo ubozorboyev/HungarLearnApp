@@ -3,9 +3,7 @@
     package="info.puzz.a10000sentences">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <!--    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />-->
-
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> -->
     <uses-feature android:name="android.hardware.screen.portrait" />
 
     <application
@@ -15,6 +13,7 @@
         android:label="${appName}"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
 
         <provider
             android:name=".dao.DatabaseContentProvider"
@@ -29,7 +28,7 @@
             android:value="10" />
 
         <activity
-            android:name=".activities.CollectionsActivity"
+            android:name=".activities.LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -38,14 +37,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
-            android:name=".activities.SentenceQuizActivity"
+            android:name="info.puzz.a10000sentences.activities.SentenceQuizActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+
+
         <activity
-            android:name=".activities.CollectionActivity"
+            android:name="info.puzz.a10000sentences.activities.CollectionActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+
+        <activity
+            android:name=".activities.CollectionsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".activities.SentencesActivity"
             android:screenOrientation="portrait"

@@ -9,7 +9,7 @@
         <variable name="sentenceCollection" type="info.puzz.a10000sentences.models.SentenceCollection" />
     </data>
 
-    <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/drawer_layout"
@@ -18,7 +18,7 @@
         android:fitsSystemWindows="true"
         tools:openDrawer="start">
 
-        <android.support.design.widget.CoordinatorLayout
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true">
@@ -69,7 +69,7 @@
                         android:layout_height="wrap_content" />
 
                     <View
-                        android:layout_margin="10dp"
+                        android:layout_marginVertical="10dp"
                         android:layout_width="fill_parent"
                         android:layout_height="1dip"
                         android:background="@color/inactive" />
@@ -88,6 +88,7 @@
                             <com.joanzapata.iconify.widget.IconTextView
                                 android:layout_gravity="center"
                                 android:text="{fa-list-ol}"
+                                android:visibility="gone"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
                             <TextView
@@ -102,7 +103,8 @@
                                 android:layout_height="wrap_content" />
                         </LinearLayout>
                         <Space
-                            android:layout_width="5dp"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
                             android:layout_height="wrap_content" />
                         <LinearLayout
                             android:orientation="vertical"
@@ -111,6 +113,7 @@
                             <com.joanzapata.iconify.widget.IconTextView
                                 android:layout_gravity="center"
                                 android:text="{fa-thumbs-o-up}"
+                                android:visibility="gone"
                                 android:textColor="@color/active"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
@@ -128,7 +131,8 @@
                                 android:layout_height="wrap_content" />
                         </LinearLayout>
                         <Space
-                            android:layout_width="5dp"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
                             android:layout_height="wrap_content" />
                         <LinearLayout
                             android:orientation="vertical"
@@ -137,6 +141,7 @@
                             <com.joanzapata.iconify.widget.IconTextView
                                 android:layout_gravity="center"
                                 android:text="{fa-thumbs-o-down}"
+                                android:visibility="gone"
                                 android:textColor="@color/error"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
@@ -154,7 +159,8 @@
                                 android:layout_height="wrap_content" />
                         </LinearLayout>
                         <Space
-                            android:layout_width="5dp"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
                             android:layout_height="wrap_content" />
                         <LinearLayout
                             android:orientation="vertical"
@@ -163,6 +169,7 @@
                             <com.joanzapata.iconify.widget.IconTextView
                                 android:layout_gravity="center"
                                 android:text="{fa-language}"
+                                android:visibility="gone"
                                 android:textColor="@color/annotation"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
@@ -183,12 +190,13 @@
                     </LinearLayout>
 
                     <View
-                        android:layout_margin="10dp"
+                        android:layout_marginVertical="10dp"
                         android:layout_width="fill_parent"
                         android:layout_height="1dip"
                         android:background="@color/inactive" />
 
                     <LinearLayout
+                        android:visibility="gone"
                         android:orientation="horizontal"
                         android:gravity="center"
                         android:layout_gravity="center"
@@ -218,7 +226,7 @@
                                 android:layout_height="wrap_content" />
                         </LinearLayout>
                         <Space
-                            android:layout_width="5dp"
+                            android:layout_width="40dp"
                             android:layout_height="wrap_content" />
                         <LinearLayout
                             android:orientation="vertical"
@@ -256,6 +264,8 @@
                     <Button
                         android:id="@+id/random_sentence"
                         android:visibility="gone"
+                        android:textColor="@color/white"
+                        android:background="@color/colorPrimary"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@{sentenceCollection.doneCount == 0 ? R.string.random_sentence : R.string.continue_learning}"
@@ -264,6 +274,9 @@
                     <Button
                         android:id="@+id/random_known_sentence"
                         android:visibility="gone"
+                        android:layout_marginTop="8dp"
+                        android:textColor="@color/white"
+                        android:background="@color/colorPrimary"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/practice_known_sentences"
@@ -272,6 +285,9 @@
                     <Button
                         android:id="@+id/all_sentences"
                         android:visibility="gone"
+                        android:layout_marginTop="8dp"
+                        android:textColor="@color/white"
+                        android:background="@color/colorPrimary"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/all_sentences" />
@@ -279,12 +295,18 @@
                     <Button
                         android:id="@+id/annotations"
                         android:visibility="gone"
+                        android:layout_marginTop="8dp"
+                        android:textColor="@color/white"
+                        android:backgroundTint="@color/colorPrimary"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/annotations" />
 
                     <Button
                         android:id="@+id/download"
+                        android:textColor="@color/white"
+                        android:layout_marginTop="8dp"
+                        android:backgroundTint="@color/colorPrimary"
                         android:visibility="@{sentenceCollection.count == 0 ? View.VISIBLE : View.GONE}"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -295,10 +317,16 @@
             </RelativeLayout>
             <!-- ...body -->
 
-        </android.support.design.widget.CoordinatorLayout>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+
 
         <include layout="@layout/nav_view" />
 
-    </android.support.v4.widget.DrawerLayout>
+
+
+
+    </androidx.drawerlayout.widget.DrawerLayout>
 </layout>
 

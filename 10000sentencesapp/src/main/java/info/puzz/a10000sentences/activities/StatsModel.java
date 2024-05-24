@@ -1,6 +1,6 @@
 package info.puzz.a10000sentences.activities;
 
-import android.databinding.BaseObservable;
+import androidx.databinding.BaseObservable;
 import android.os.AsyncTask;
 
 import javax.inject.Inject;

@@ -4,7 +4,7 @@ package info.puzz.a10000sentences.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import info.puzz.a10000sentences.R;

@@ -7,17 +7,17 @@ import android.content.pm.PackageInfo;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.SubMenu;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
+import com.google.android.material.navigation.NavigationView;
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.FontAwesomeIcons;
 
@@ -28,7 +28,6 @@ import java.util.Random;
 import javax.inject.Inject;
 
 import info.puzz.a10000sentences.Application;
-import info.puzz.a10000sentences.BuildConfig;
 import info.puzz.a10000sentences.R;
 import info.puzz.a10000sentences.api.Api;
 import info.puzz.a10000sentences.apimodels.InfoVO;
@@ -60,11 +59,11 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onPause() {
         super.onPause();
-        if (BuildConfig.DEBUG) {
+       // if (BuildConfig.DEBUG) {
             // Test db locally with:
             //adb pull /sdcard/debug_10000sentences.db && sqlite3 debug_10000sentences.db
             DebugUtils.backupDatabase(this, "10000sentences.db");
-        }
+       // }
     }
 
     @Override
@@ -83,6 +82,11 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    void resetTitle(){
+
+
     }
 
     void reloadLanguages() {
@@ -104,6 +108,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                     _onResponse(response);
                     Toast.makeText(BaseActivity.this, getString(R.string.imported), Toast.LENGTH_SHORT).show();
                 } finally {
+                    resetTitle();
                     progressDialog.hide();
                 }
             }
@@ -179,7 +184,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         }
         collectionNavigationSet = true;
 
-        SubMenu submenu = navigationView.getMenu().addSubMenu(R.string.downloaded_colections);
+        //SubMenu submenu = navigationView.getMenu().addSubMenu(R.string.downloaded_colections);
         Map<String, Language> languages = dao.getLanguagesByLanguageID();
 
         for (final SentenceCollection collection : dao.getCollections()) {
@@ -190,14 +195,14 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
             if (collection.todoCount == 0) {
                 continue;
             }
-            MenuItem menu = submenu.add(language.name).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-                @Override
-                public boolean onMenuItemClick(MenuItem menuItem) {
-                    CollectionActivity.start(BaseActivity.this, collection.collectionID);
-                    return true;
-                }
-            });
-            setupMenuIcon(menu, FontAwesomeIcons.fa_language);
+//            MenuItem menu = submenu.add(language.name).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+//                @Override
+//                public boolean onMenuItemClick(MenuItem menuItem) {
+//                    CollectionActivity.start(BaseActivity.this, collection.collectionID);
+//                    return true;
+//                }
+//            });
+           // setupMenuIcon(menu, FontAwesomeIcons.fa_language);
         }
     }
 

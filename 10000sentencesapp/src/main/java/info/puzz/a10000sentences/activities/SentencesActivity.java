@@ -1,15 +1,14 @@
 package info.puzz.a10000sentences.activities;
 
 import android.content.Intent;
-import android.databinding.DataBindingUtil;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 
-import com.activeandroid.query.From;
+import androidx.databinding.DataBindingUtil;
 
-import java.util.concurrent.CompletableFuture;
+import com.activeandroid.query.From;
 
 import javax.inject.Inject;
 

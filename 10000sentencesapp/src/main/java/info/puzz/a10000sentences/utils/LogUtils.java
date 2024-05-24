@@ -2,8 +2,6 @@ package info.puzz.a10000sentences.utils;
 
 import android.util.Log;
 
-import info.puzz.a10000sentences.BuildConfig;
-
 public final class LogUtils {
 
     public LogUtils() throws Exception {
@@ -14,34 +12,34 @@ public final class LogUtils {
         Log.e(getSimpleName(o), msg, e);
     }
     public static void e(Object o, String format, Object... args) {
-        if (BuildConfig.DEBUG) {
+//        if (BuildConfig.DEBUG) {
             Log.e(getSimpleName(o), String.format(format, args));
-        }
+//        }
     }
     public static void i(Object o, String format, Object... args) {
-        if (BuildConfig.DEBUG) {
+//        if (BuildConfig.DEBUG) {
             Log.i(getSimpleName(o), String.format(format, args));
-        }
+//        }
     }
     public static void d(Object o, String format, Object... args) {
-        if (BuildConfig.DEBUG) {
+//        if (BuildConfig.DEBUG) {
             Log.d(getSimpleName(0), String.format(format, args));
-        }
+//        }
     }
     public static void v(Object o, String format, Object... args) {
-        if (BuildConfig.DEBUG) {
+//        if (BuildConfig.DEBUG) {
             Log.v(getSimpleName(o), String.format(format, args));
-        }
+//        }
     }
     public static void w(Object o, String format, Object... args) {
-        if (BuildConfig.DEBUG) {
+//        if (BuildConfig.DEBUG) {
             Log.w(getSimpleName(o), String.format(format, args));
-        }
+//        }
     }
     public static void wtf(Object o, String format, Object... args) {
-        if (BuildConfig.DEBUG) {
+//        if (BuildConfig.DEBUG) {
             Log.wtf(getSimpleName(o), String.format(format, args));
-        }
+//        }
     }
 
     private static String getSimpleName(Object o) {

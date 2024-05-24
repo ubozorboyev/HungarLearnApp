@@ -1,6 +1,7 @@
 package info.puzz.a10000sentences;
 
 import com.activeandroid.ActiveAndroid;
+import com.google.firebase.FirebaseApp;
 import com.joanzapata.iconify.Iconify;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
 
@@ -11,6 +12,9 @@ public class Application extends android.app.Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        FirebaseApp.initializeApp(getApplicationContext());
+
         initIconify();
         initActiveAndroid();
         initDagger();

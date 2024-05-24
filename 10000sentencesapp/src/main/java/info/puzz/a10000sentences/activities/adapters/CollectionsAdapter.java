@@ -1,13 +1,14 @@
 package info.puzz.a10000sentences.activities.adapters;
 
 import android.content.Context;
-import android.databinding.DataBindingUtil;
-import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+
+import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -34,6 +35,11 @@ public class CollectionsAdapter extends ArrayAdapter<SentenceCollection> {
         super(activity, R.layout.sentence_collection, cols);
         Application.COMPONENT.inject(this);
         for (Language language : dao.getLanguages()) {
+
+            Log.d("LANGUAGE","language : "+language.toString());
+
+
+
             languages.put(language.getLanguageId(), language);
         }
     }
@@ -58,6 +64,8 @@ public class CollectionsAdapter extends ArrayAdapter<SentenceCollection> {
         binding.getRoot().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // en-hu collectionID
+                //Toast.makeText(view.getContext(),getItem(position).collectionID,Toast.LENGTH_SHORT).show();
                 CollectionActivity.start((BaseActivity) getContext(), collection.getCollectionID());
             }
 

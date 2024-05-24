@@ -4,13 +4,14 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.databinding.DataBindingUtil;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.databinding.DataBindingUtil;
 
 import javax.inject.Inject;
 
@@ -39,12 +40,42 @@ public class CollectionActivity extends BaseActivity implements ImporterAsyncTas
     SentenceCollectionsService sentenceCollectionsService;
 
     ActivityCollectionBinding binding;
-    private String collectionId;
+    private String collectionId = "en-hu";
 
     public static <T extends BaseActivity> void start(T activity, String collectionId) {
         Intent intent = new Intent(activity, CollectionActivity.class);
         intent.putExtra(ARG_COLLECTION_ID, collectionId);
         activity.startActivity(intent);
+    }
+
+
+    @Override
+    void resetTitle() {
+
+
+        final SentenceCollection collection = dao.getCollection(collectionId);
+
+        binding.setSentenceCollection(collection);
+        binding.setKnownLanguage(dao.getLanguage(collection.getKnownLanguage()));
+        binding.setTargetLanguage(dao.getLanguage(collection.getTargetLanguage()));
+        setTitle(binding.getTargetLanguage().name);
+
+
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voidd) {
+                dao.reloadCollectionCounter(collection);
+                return null;
+            }
+            @Override
+            protected void onPostExecute(Void voidd) {
+                binding.randomSentence.setVisibility(collection.count > 0 ? View.VISIBLE : View.GONE);
+                binding.randomKnownSentence.setVisibility(collection.doneCount > 0 ? View.VISIBLE : View.GONE);
+                binding.allSentences.setVisibility(collection.count > 0 ? View.VISIBLE : View.GONE);
+                //binding.annotations.setVisibility(collection.annotationCount > 0 ? View.VISIBLE : View.GONE);
+            }
+        }.execute();
+
     }
 
     @Override
@@ -54,25 +85,22 @@ public class CollectionActivity extends BaseActivity implements ImporterAsyncTas
         Application.COMPONENT.injectActivity(this);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_collection);
 
-        collectionId = getIntent().getStringExtra(ARG_COLLECTION_ID);
+        if (dao.getLanguages().size() == 0) {
+            reloadLanguages();
+        }
+
+
+
+        //collectionId = getIntent().getStringExtra(ARG_COLLECTION_ID);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        final SentenceCollection collection = dao.getCollection(collectionId);
-        if (collection == null) {
-            Toast.makeText(this, R.string.unexpected_error, Toast.LENGTH_SHORT).show();
-            CollectionsActivity.start(this);
-            return;
+        if (!dao.getLanguages().isEmpty()){
+            resetTitle();
         }
-
-        binding.setSentenceCollection(collection);
-        binding.setKnownLanguage(dao.getLanguage(collection.getKnownLanguage()));
-        binding.setTargetLanguage(dao.getLanguage(collection.getTargetLanguage()));
-
-        setTitle(binding.getTargetLanguage().name);
 
         binding.randomKnownSentence.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,20 +133,7 @@ public class CollectionActivity extends BaseActivity implements ImporterAsyncTas
             }
         });
 
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... _) {
-                dao.reloadCollectionCounter(collection);
-                return null;
-            }
-            @Override
-            protected void onPostExecute(Void _) {
-                binding.randomSentence.setVisibility(collection.count > 0 ? View.VISIBLE : View.GONE);
-                binding.randomKnownSentence.setVisibility(collection.doneCount > 0 ? View.VISIBLE : View.GONE);
-                binding.allSentences.setVisibility(collection.count > 0 ? View.VISIBLE : View.GONE);
-                binding.annotations.setVisibility(collection.annotationCount > 0 ? View.VISIBLE : View.GONE);
-            }
-        }.execute();
+
 
     }
 
@@ -164,8 +179,13 @@ public class CollectionActivity extends BaseActivity implements ImporterAsyncTas
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.collection, menu);
 
-        menu.findItem(R.id.action_remove_collecition).setVisible(binding.getSentenceCollection().count > 0);
-        menu.findItem(R.id.action_redownload).setVisible(binding.getSentenceCollection().count > 0);
+        try {
+            menu.findItem(R.id.action_remove_collecition).setVisible(binding.getSentenceCollection().count > 0);
+            menu.findItem(R.id.action_redownload).setVisible(binding.getSentenceCollection().count > 0);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         return true;
     }
@@ -249,7 +269,7 @@ public class CollectionActivity extends BaseActivity implements ImporterAsyncTas
                             if (binding.getSentenceCollection().getCollectionID().equalsIgnoreCase(value)) {
                                 dao.removeCollectionSentences(binding.getSentenceCollection());
                                 Toast.makeText(CollectionActivity.this, R.string.collection_deleted, Toast.LENGTH_SHORT).show();
-                                CollectionsActivity.start(CollectionActivity.this);
+                                //CollectionsActivity.start(CollectionActivity.this);
                             } else {
                                 Toast.makeText(CollectionActivity.this, R.string.not_deleted, Toast.LENGTH_SHORT).show();
                             }

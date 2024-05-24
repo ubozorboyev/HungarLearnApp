@@ -3,11 +3,12 @@ package info.puzz.a10000sentences.activities;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import androidx.databinding.DataBindingUtil;
 
 import com.activeandroid.query.Select;
 
@@ -58,11 +59,11 @@ public class EditAnnotationActivity extends BaseActivity {
         annotationId = getIntent().getLongExtra(ARG_ANNOTATION_ID, -1);
 
         Annotation annotation = Annotation.load(Annotation.class, annotationId);
-        if (annotation == null) {
-            Toast.makeText(this, R.string.unexpected_error, Toast.LENGTH_SHORT).show();
-            CollectionsActivity.start(this);
-            return;
-        }
+//        if (annotation == null) {
+//            Toast.makeText(this, R.string.unexpected_error, Toast.LENGTH_SHORT).show();
+//            CollectionsActivity.start(this);
+//            return;
+//        }
 
         SentenceCollection collection = dao.getCollection(annotation.collectionId);
         speech = new Speech(this, dao.getLanguage(collection.targetLanguage));

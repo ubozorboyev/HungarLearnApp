@@ -2,9 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_collections"
-            android:title="@string/collections" />
+
         <item
             android:id="@+id/nav_annotations"
             android:title="@string/word_annotations" />
@@ -20,12 +18,23 @@
         <item
             android:id="@+id/nav_tts_settings"
             android:title="@string/tts_settings" />
-        <item
-            android:id="@+id/nav_about"
-            android:title="@string/about" />
+
         <item
             android:id="@+id/nav_help"
             android:title="@string/help" />
+
+        <item
+            android:visible="false"
+            android:id="@+id/nav_collections"
+            android:title="@string/collections" />
+
+
+        <item
+            android:id="@+id/nav_about"
+            android:visible="false"
+            android:title="@string/about" />
+
+
     </group>
 
 </menu>

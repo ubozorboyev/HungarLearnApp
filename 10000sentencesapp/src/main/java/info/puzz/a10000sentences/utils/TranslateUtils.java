@@ -1,19 +1,9 @@
 package info.puzz.a10000sentences.utils;
 
 import android.app.Activity;
-import android.content.ComponentName;
 import android.content.Intent;
-import android.content.pm.LabeledIntent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
-import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.Toast;
-
-import org.apache.commons.lang3.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import info.puzz.a10000sentences.R;
 

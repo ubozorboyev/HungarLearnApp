@@ -2,11 +2,12 @@ package info.puzz.a10000sentences.activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v7.app.AlertDialog;
 import android.webkit.WebView;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.databinding.DataBindingUtil;
 
 import java.util.List;
 
@@ -90,6 +91,7 @@ public class CollectionsActivity extends BaseActivity implements BaseActivity.On
 
     private void reloadCollections() {
         List<SentenceCollection> cols = dao.getCollections();
+
         binding.collectionsList.setAdapter(new CollectionsAdapter(this, cols));
     }
 

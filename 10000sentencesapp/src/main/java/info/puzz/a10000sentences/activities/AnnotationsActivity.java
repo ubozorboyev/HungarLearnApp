@@ -1,11 +1,12 @@
 package info.puzz.a10000sentences.activities;
 
 import android.content.Intent;
-import android.databinding.DataBindingUtil;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+
+import androidx.databinding.DataBindingUtil;
 
 import com.activeandroid.query.From;
 import com.activeandroid.query.Select;
